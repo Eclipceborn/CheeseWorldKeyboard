@@ -17,6 +17,8 @@ public class Player {
     //movement booleans
     public boolean right;
     public boolean down;
+    public boolean left;
+    public boolean up;
 
 
     public Player(int pXpos, int pYpos, int dxParameter, int dyParameter, Image picParameter) {
@@ -33,6 +35,22 @@ public class Player {
 
     } // constructor
 
+    public void move2() {
+
+        xpos = xpos + dx;
+        xpos = xpos + dy;
+
+        if (up == true) {
+            dy = -5;
+        } else if (down == true) {
+            dy = 5;
+        } else {
+            dy = 0;
+        }
+
+    }
+
+
     //move( ) method for a keyboard controlled character
     public void move() {
 
@@ -43,12 +61,27 @@ public class Player {
             }
         }
 
+        if(left){
+            xpos = xpos +dx;
+            if(xpos<1000-width){
+                xpos = 1000+width;
+            }
+        }
+
         if(down){
             ypos = ypos +dy;
             if(ypos>700-height){
                 ypos = 700-height;
             }
         }
+
+        if(up){
+            ypos = ypos +dy;
+            if(ypos<700+height){
+                ypos = 700+height;
+            }
+        }
+
 
         //always put this after you've done all the changing of the xpos and ypos values
         rec = new Rectangle(xpos, ypos, width, height);
